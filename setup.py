@@ -22,8 +22,8 @@ setuptools.setup(
     install_requires=[
         'numpy',
         'pandas',
-        'matplotlib==3.0.3',
-        'PySimpleGUI',
+        'matplotlib',
+        'PySimpleGUIQt',
         'Pillow',
         'opencv-python',
         'moviepy',

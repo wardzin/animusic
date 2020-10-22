@@ -1,6 +1,6 @@
 import os
 import platform
-import PySimpleGUI as sg
+import PySimpleGUIQt as sg
 from concurrent.futures import ThreadPoolExecutor
 from . import anim
 
@@ -32,6 +32,10 @@ def main():
                 break
 
             if event == 'Animate':
+                if not values['output'].endswith('.mp4'):
+                    window['output'].update(values['output']+'.mp4')
+                    values['output'] += '.mp4'
+
                 animation_thread = executor.submit(anim.create_animation,
                     img=values['input'],
                     audio=values['audio'],
@@ -40,7 +44,13 @@ def main():
                 window['Animate'].update(disabled=True, text='Running...')
 
             if animation_thread is not None and animation_thread.done():
+                try:
+                    animation_thread.result()  # we call this to propagate errors to the main thread
+                except Exception as e:
+                    print(e)
+
                 animation_thread = None
+
                 window['Animate'].update(disabled=False, text='Animate')
 
                 if platform.system() == 'Windows':

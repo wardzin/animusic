@@ -190,10 +190,6 @@ def create_animation(img='brigada.jpg', audio=None, video=None, output='dancing 
 
         bars = 64
         S = librosa.feature.melspectrogram(y, sr=sr, power=0.5, n_mels=bars, n_fft=n_fft, hop_length=hop_length, win_length=win_length, window='blackman')
-#         S = librosa.pcen(S, sr=sr, hop_length=hop_length)
-#         S = librosa.amplitude_to_db(S)
-#         freqs = librosa.mel_frequencies(n_mels=bars, fmax=sr/2)
-#         S = librosa.perceptual_weighting(S, freqs, kind='A')
         S = (S - S.min()) / (S.max() - S.min())
 
         visualizer_frames = []
