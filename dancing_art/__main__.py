@@ -1,6 +1,8 @@
 import os
 import platform
 import PySimpleGUIQt as sg
+import importlib.resources
+import json
 from concurrent.futures import ThreadPoolExecutor
 from . import anim
 
@@ -17,18 +19,34 @@ def main():
         #     [sg.Text('Encoding speed'), sg.Combo(['very fast', 'fast', 'medium', 'slow', 'very slow'], default_value='medium')],
         #     [sg.Text('Additional FFmpeg parameters'), sg.InputText('-bf 2 -b_strategy 2')],
         # ])],
-        [sg.Button('Animate', key='Animate')],
+        [sg.Button('Animate')],
     ]
+    save_keys = ['input', 'audio', 'output']
 
     window = sg.Window('Dancing Art', layout, size=(win_width, win_height))
+    window.finalize()
     
-    with ThreadPoolExecutor(1) as executor:
+    with ThreadPoolExecutor(1) as executor, importlib.resources.path('dancing_art', 'save.json') as save_filepath:
         animation_thread = None
+
+        try:
+            with open(save_filepath, 'r') as save_file:
+                saved_values = json.load(save_file)
+            for key in save_keys:
+                if key in saved_values:
+                    window[key].update(saved_values[key])
+            print('Loaded values from previous session')
+        except json.decoder.JSONDecodeError:
+            pass
+        last_values = {key: None for key in save_keys}
 
         while True:
             event, values = window.read(timeout=100)
 
             if event == sg.WIN_CLOSED:
+                saved_values = {key: last_values[key] for key in save_keys}
+                with open(save_filepath, 'w') as save_file:
+                    json.dump(saved_values, save_file)
                 break
 
             if event == 'Animate':
@@ -59,6 +77,8 @@ def main():
                     os.system('open ' + values['output'])
                 elif platform.system() == 'Linux':
                     os.system('xdg-open ' + values['output'])
+
+            last_values = values.copy()
                 
     window.close()
 
