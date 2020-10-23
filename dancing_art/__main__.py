@@ -1,7 +1,6 @@
 import os
 import platform
 import PySimpleGUIQt as sg
-import importlib.resources
 import json
 from concurrent.futures import ThreadPoolExecutor
 from . import anim
@@ -26,9 +25,10 @@ def main():
     window = sg.Window('Dancing Art', layout, size=(win_width, win_height))
     window.finalize()
     
-    with ThreadPoolExecutor(1) as executor, importlib.resources.path('dancing_art', 'save.json') as save_filepath:
+    with ThreadPoolExecutor(1) as executor:
         animation_thread = None
 
+        save_filepath = os.path.join(os.path.dirname(__file__), 'save.json')
         try:
             with open(save_filepath, 'r') as save_file:
                 saved_values = json.load(save_file)
@@ -36,7 +36,7 @@ def main():
                 if key in saved_values:
                     window[key].update(saved_values[key])
             print('Loaded values from previous session')
-        except json.decoder.JSONDecodeError:
+        except (FileNotFoundError, json.decoder.JSONDecodeError):
             pass
         last_values = {key: None for key in save_keys}
 
