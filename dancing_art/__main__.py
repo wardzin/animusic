@@ -7,6 +7,10 @@ from . import anim
 
 
 def main():
+    # include ffmpeg binary for Windows users
+    if platform.system() == 'Windows':
+        os.environ['PATH'] += os.pathsep + os.path.join(os.path.dirname(__file__), 'bin')
+
     win_width, win_height = 600, 300
 
     layout = [
