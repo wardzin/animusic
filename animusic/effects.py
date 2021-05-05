@@ -1,9 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-import cv2
 from PIL import Image, ImageChops
-# from scipy.ndimage import zoom as zoom_image
-# from wand.image import Image as WandImage
 
 
 def sin_wave_distortion(img, signal, mag=10, freq=20):
@@ -243,7 +240,8 @@ def zoom(img, signal, max_zoom=0.10):
     pad_height2, pad_width2 = (height - resize_height) - pad_height1, (width - resize_width) - pad_width1
     pad_spec = [(pad_height1, pad_height2), (pad_width1, pad_width2)] + [(0,0)] * (img.ndim - 2)
 
-    result = cv2.resize(cropped_img, (resize_width, resize_height))
+    # result = cv2.resize(cropped_img, (resize_width, resize_height))
+    result = np.array(Image.fromarray(cropped_img).resize((resize_width, resize_height), Image.NEAREST))
     result = np.pad(result, pad_spec, mode='constant')
     assert result.shape[0] == height and result.shape[1] == width
     return result

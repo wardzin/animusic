@@ -25,7 +25,6 @@ setuptools.setup(
         'matplotlib',
         'PySimpleGUIQt',
         'Pillow',
-        'opencv-python',
         'moviepy',
         'librosa',
         'tqdm'
