@@ -11,7 +11,7 @@ def main():
     if platform.system() == 'Windows':
         os.environ['PATH'] += os.pathsep + os.path.join(os.path.dirname(__file__), 'bin')
 
-    win_width, win_height = 600, 300
+    win_width, win_height = 600, 150
 
     layout = [
         [sg.Text('Input Image or Video'), sg.Input(key='input'), sg.FileBrowse(file_types=(('Image or Video', '*.jpg *.jpeg *.png *.gif *.mp4 *.mov *.flv *.avi *.webm *.mkv'), ('All Files', '*.*')))],
@@ -26,7 +26,7 @@ def main():
     ]
     save_keys = ['input', 'audio', 'output']
 
-    window = sg.Window('Dancing Art', layout, size=(win_width, win_height))
+    window = sg.Window('Animusic', layout, size=(win_width, win_height))
     window.finalize()
     
     with ThreadPoolExecutor(1) as executor:

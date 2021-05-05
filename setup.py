@@ -4,21 +4,21 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="dancing-art", # Replace with your own username
+    name="animusic", # Replace with your own username
     version="0.0.1",
     author="Daniel Wardzinski",
     author_email="daniel.ward07@gmail.com",
     description="",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/wardzin/dancing-art",
+    url="https://github.com/wardzin/animusic",
     packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
-    py_modules=['dancing_art'],
+    py_modules=['animusic'],
     install_requires=[
         'numpy',
         'pandas',
@@ -33,7 +33,7 @@ setuptools.setup(
     python_requires='>=3.6',
     entry_points={
         'console_scripts': [
-            'dancing-art = dancing_art.__main__:main',
+            'animusic = animusic.__main__:main',
         ],
     },
     include_package_data=True,

@@ -67,7 +67,7 @@ def apply_effect(get_frame, t, effect, signals, convert_image=False):
 #                 return effect(frame, signal=signal)
 
 
-def create_animation(img='brigada.jpg', audio=None, video=None, output='dancing art.mp4', start_time=0, end_time=None, fps=30, frame_smoothing=4, visualizer=False):
+def create_animation(img=None, audio=None, video=None, output='animusic.mp4', start_time=0, end_time=None, fps=30, frame_smoothing=4, visualizer=False):
     if isinstance(start_time, str):
         start_time = mins_to_secs(start_time)
     if isinstance(end_time, str):
