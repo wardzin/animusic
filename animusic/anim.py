@@ -4,6 +4,7 @@ import pandas as pd
 import os
 import matplotlib.pyplot as plt
 import PIL
+import mimetypes
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 from matplotlib.figure import Figure
 from moviepy import editor
@@ -67,14 +68,18 @@ def apply_effect(get_frame, t, effect, signals, convert_image=False):
 #                 return effect(frame, signal=signal)
 
 
-def create_animation(img=None, audio=None, video=None, output='animusic.mp4', start_time=0, end_time=None, fps=30, frame_smoothing=4, visualizer=False):
+def create_animation(img=None, audio=None, video=None, output='animusic.mp4', start_time=0, end_time=None, fps=30, frame_smoothing=3, visualizer=False):
     if isinstance(start_time, str):
         start_time = mins_to_secs(start_time)
     if isinstance(end_time, str):
         end_time = mins_to_secs(end_time)
         
-    global original_image
-    original_image = PIL.Image.open(img)
+    # global original_image
+    # original_image = PIL.Image.open(img)
+
+    if mimetypes.guess_type(img)[0].startswith('video'):
+        video = img
+        img = None
     
     print('Analyzing audio...')
     if video and not audio:
@@ -84,14 +89,16 @@ def create_animation(img=None, audio=None, video=None, output='animusic.mp4', st
     
     if end_time is None:
         end_time = librosa.get_duration(y, sr)
-    y = y[int(start_time*sr):int(end_time*sr)]
     duration = end_time - start_time
     
     if video:
         video_clip = editor.VideoFileClip(video)
         fps = video_clip.fps
+        end_time = start_time + video_clip.duration
     else:
         video_clip = editor.ImageClip(img, duration=duration).set_fps(fps)
+
+    y = y[int(start_time*sr):int(end_time*sr)]
         
     if audio:
         audio_clip = editor.AudioFileClip(audio, fps=sr).subclip(t_start=start_time, t_end=end_time)
