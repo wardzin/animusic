@@ -6,7 +6,7 @@ Animusic is a Python package that allows you to easily create animated music vid
 * Uses different effects for different frequencies to create more dynamic and responsive animations.
 * Can animate both images and videos.
 * Supports all major image, video, and audio formats.
-* Includes a user-friendly GUI made with **PySimpleGUI**.
+* Includes a user-friendly GUI made with [**PySimpleGUI**](https://github.com/PySimpleGUI/PySimpleGUI).
 * No tweaking necessary - the animation algorithm was specifically designed to work well out-of-the-box for most types of music.
 
 ## Showcase
