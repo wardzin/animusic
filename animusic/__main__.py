@@ -1,6 +1,6 @@
 import os
 import platform
-import PySimpleGUIQt as sg
+import PySimpleGUI as sg
 import json
 from concurrent.futures import ThreadPoolExecutor
 from . import anim

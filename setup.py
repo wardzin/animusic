@@ -4,8 +4,8 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="animusic", # Replace with your own username
-    version="0.0.1",
+    name="animusic",
+    version="0.0.2",
     author="Daniel Wardzinski",
     author_email="daniel.ward07@gmail.com",
     description="",
@@ -23,7 +23,7 @@ setuptools.setup(
         'numpy',
         'pandas',
         'matplotlib',
-        'PySimpleGUIQt',
+        'PySimpleGUI',
         'Pillow',
         'moviepy',
         'librosa',
