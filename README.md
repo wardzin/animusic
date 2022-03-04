@@ -10,11 +10,11 @@ Animusic is a Python package that allows you to easily create animated music vid
 * No tweaking necessary - the animation algorithm was specifically designed to work well out-of-the-box for most types of music.
 
 ## Showcase
+https://user-images.githubusercontent.com/1664699/156676898-90b04c29-b27a-413e-a678-5aef7daa5546.mp4
+
 https://user-images.githubusercontent.com/1664699/117237477-0fe41580-adf9-11eb-834f-7ed80f4f703c.mp4
 
-https://user-images.githubusercontent.com/1664699/117234423-f5a73900-adf2-11eb-9377-15736224f881.mp4
-
-https://user-images.githubusercontent.com/1664699/117233721-ad3b4b80-adf1-11eb-9c12-5cdada513c17.mp4
+https://user-images.githubusercontent.com/1664699/156676750-2ec8a965-e857-4de1-a92f-25ebc3c8e345.mp4
 
 ## Requirements
 This package requires [**ffmpeg**](https://www.ffmpeg.org/) to be installed in order to work.
